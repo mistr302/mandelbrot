@@ -1,8 +1,8 @@
-#version 460 core
+#version 330 core
 
 out vec2 fragPos;
 
-const vec2 vertices[4] = {
+const vec2 vertices[3] = {
     {-1., -1.},
     {-1., +3.},
     {+3., -1.},
