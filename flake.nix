@@ -29,6 +29,7 @@
               python3Packages.glad # or python3Packages.glad2 for newer version
               glfw
               gdb
+              glib
             ];
           }
         );
