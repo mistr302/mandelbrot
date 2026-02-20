@@ -85,7 +85,7 @@ int main() {
     glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
   }
   // fragment shader
-  const char *fragmentShaderSrc = vertexShaderSource;
+  const char *fragmentShaderSrc = fragmentShaderSource;
   unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
   glShaderSource(fragmentShader, 1, &fragmentShaderSrc, NULL);
   free(fragmentShaderSource);
@@ -95,6 +95,7 @@ int main() {
   glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
   if (!success) {
     glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
+    printf("Fragment shader compilation failed:\n%s\n", infoLog);
   }
   // link shaders
   unsigned int shaderProgram = glCreateProgram();
@@ -105,6 +106,7 @@ int main() {
   glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
   if (!success) {
     glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
+    printf("Fragment shader compilation failed:\n%s\n", infoLog);
   }
   glDeleteShader(vertexShader);
   glDeleteShader(fragmentShader);
