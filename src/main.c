@@ -96,6 +96,7 @@ int main() {
   glDeleteShader(vertexShader);
   glDeleteShader(fragmentShader);
 
+  GLint timeLocation = glGetUniformLocation(shaderProgram, "u_time");
   // set up vertex data (and buffer(s)) and configure vertex attributes
   // ------------------------------------------------------------------
   float vertices[] = {-1.0f, -1.0f, 3.0f, -1.0f, -1.0f, 3.0f};
@@ -122,7 +123,6 @@ int main() {
   // call to glBindVertexArray anyways so we generally don't unbind VAOs (nor
   // VBOs) when it's not directly necessary.
   glBindVertexArray(0);
-
   // uncomment this call to draw in wireframe polygons.
   // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
@@ -138,8 +138,11 @@ int main() {
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
 
-    // draw our first triangle
+    float timeValue = glfwGetTime();
+
     glUseProgram(shaderProgram);
+    glUniform1f(timeLocation, timeValue);
+
     glBindVertexArray(
         VAO); // seeing as we only have a single VAO there's no need to bind it
               // every time, but we'll do so to keep things a bit more organized
