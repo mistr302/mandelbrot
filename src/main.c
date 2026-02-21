@@ -99,7 +99,8 @@ int main() {
   GLint timeLocation = glGetUniformLocation(shaderProgram, "u_time");
   // set up vertex data (and buffer(s)) and configure vertex attributes
   // ------------------------------------------------------------------
-  float vertices[] = {-1.0f, -1.0f, 3.0f, -1.0f, -1.0f, 3.0f};
+  // float vertices[] = {-1.0f, -1.0f, 3.0f, -1.0f, -1.0f, 3.0f};
+  float vertices[] = {0.5f, -0.5f, 0.0f, 0.5f, -0.5f, -0.5f};
   unsigned int VBO, VAO;
   glGenVertexArrays(1, &VAO);
   glGenBuffers(1, &VBO);
