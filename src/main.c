@@ -2,6 +2,7 @@
 #include "include/utils.h"
 #include <GLFW/glfw3.h>
 
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 typedef float vec3[3];
@@ -134,23 +135,31 @@ int main() {
     // input
     // -----
     processInput(window);
+    float def_speed = 0.1;
+    float moveSpeed = def_speed / zoom[2];
+    // moveSpeed = fabs(moveSpeed);
     if (glfwGetKey(window, GLFW_KEY_UP)) {
-      zoom[1] += 0.1;
+      zoom[1] += moveSpeed;
     }
     if (glfwGetKey(window, GLFW_KEY_DOWN)) {
-      zoom[1] -= 0.1;
+      zoom[1] -= moveSpeed;
     }
     if (glfwGetKey(window, GLFW_KEY_LEFT)) {
-      zoom[0] -= 0.1;
+      zoom[0] -= moveSpeed;
     }
     if (glfwGetKey(window, GLFW_KEY_RIGHT)) {
-      zoom[0] += 0.1;
+      zoom[0] += moveSpeed;
     }
+    const float ZOOM_LIMIT = 1.0;
     if (glfwGetKey(window, GLFW_KEY_0)) {
-      zoom[2] -= 0.1;
+      if (zoom[2] <= ZOOM_LIMIT) {
+        zoom[2] = ZOOM_LIMIT + 0.001;
+        continue;
+      }
+      zoom[2] -= 0.1 * zoom[2] + 0.1;
     }
     if (glfwGetKey(window, GLFW_KEY_1)) {
-      zoom[2] += 0.1;
+      zoom[2] += 0.1 * zoom[2] + 0.1;
     }
     // render
     // ------
