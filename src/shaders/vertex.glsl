@@ -1,4 +1,4 @@
-#version 330 core
+#version 460 core
 layout(location = 0) in vec2 aPos; // input from vertex buffer
 out vec2 uv;                       // output to fragment shader
 
