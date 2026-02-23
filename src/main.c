@@ -27,14 +27,15 @@ int main() {
 #ifdef __APPLE__
   glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif
+  // TODO: handle path to be available from anywhere, not just source dir
   char *fragmentShaderSource = read_file("./src/shaders/fragment.glsl", NULL);
   if (!fragmentShaderSource) {
-    printf("fragment shader doesnt exist\n");
+    printf("couldnt read fragment shader\n");
     exit(EXIT_FAILURE);
   }
   char *vertexShaderSource = read_file("./src/shaders/vertex.glsl", NULL);
   if (!vertexShaderSource) {
-    printf("vertex shader doesnt exist\n");
+    printf("couldnt read vertex shader\n");
     exit(EXIT_FAILURE);
   }
   // glfw window creation
@@ -190,7 +191,6 @@ int main() {
   glDeleteVertexArrays(1, &VAO);
   glDeleteBuffers(1, &VBO);
   glDeleteProgram(shaderProgram);
-
   // glfw: terminate, clearing all previously allocated GLFW resources.
   // ------------------------------------------------------------------
   glfwTerminate();

@@ -36,8 +36,7 @@ char *read_file(const char *path, size_t *out_size) {
     return NULL;
   }
 
-  buffer[size] = '\0'; // Null terminate (important for shaders)
-
+  buffer[size] = '\0'; // Null terminate
   if (out_size)
     *out_size = (size_t)size;
 
