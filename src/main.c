@@ -4,7 +4,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-
+typedef float vec3[3];
 void framebuffer_size_callback(GLFWwindow *window, int width, int height);
 void processInput(GLFWwindow *window);
 
@@ -126,14 +126,32 @@ int main() {
   glBindVertexArray(0);
   // uncomment this call to draw in wireframe polygons.
   // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-
+  vec3 zoom = {0.0, 0.0, 1.0};
+  int zoomLocation = glGetUniformLocation(shaderProgram, "u_zoom");
   // render loop
   // -----------
   while (!glfwWindowShouldClose(window)) {
     // input
     // -----
     processInput(window);
-
+    if (glfwGetKey(window, GLFW_KEY_UP)) {
+      zoom[1] += 0.1;
+    }
+    if (glfwGetKey(window, GLFW_KEY_DOWN)) {
+      zoom[1] -= 0.1;
+    }
+    if (glfwGetKey(window, GLFW_KEY_LEFT)) {
+      zoom[0] -= 0.1;
+    }
+    if (glfwGetKey(window, GLFW_KEY_RIGHT)) {
+      zoom[0] += 0.1;
+    }
+    if (glfwGetKey(window, GLFW_KEY_0)) {
+      zoom[2] -= 0.1;
+    }
+    if (glfwGetKey(window, GLFW_KEY_1)) {
+      zoom[2] += 0.1;
+    }
     // render
     // ------
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
@@ -143,6 +161,7 @@ int main() {
 
     glUseProgram(shaderProgram);
     glUniform1f(timeLocation, timeValue);
+    glUniform3fv(zoomLocation, 1, zoom);
 
     glBindVertexArray(
         VAO); // seeing as we only have a single VAO there's no need to bind it
